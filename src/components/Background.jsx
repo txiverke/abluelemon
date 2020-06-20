@@ -6,6 +6,8 @@ import { IconArrow } from './Icons';
 import { useScrollPosition } from './Hooks';
 import Title from './Title';
 
+import '../css/Background.css';
+
 const iconStyling = css`
   position: absolute;
   top: -5rem;
@@ -48,7 +50,7 @@ const Background = (props) => {
             playsInline
             autoPlay
             muted
-            onPlaying='this.controls=false'
+            onPlaying="this.controls = 'false'"
             loop>
             <source
               src={background}
