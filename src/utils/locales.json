@@ -4,13 +4,33 @@
     "ABOUT_TEXT": "We achieve a positive economic and social impact of our events generated for the surrounding areas, while also providing visibility for the surrounding businesses.",
     "APP_NAME": "A Blue Lemon Productions",
     "APP_DESCRIPTION": "We achieve a positive economic and social impact of our events generated for the surrounding areas, while also providing visibility for the surrounding businesses.",
-    "FOOTER_OFFICE": "Germany office ",
-    "FOOTER_ADDRESS": "Elbestrasse 15, 60329 – Frankfurt am Main, Germany",
-    "FOOTER_NAVIGATION": "Navigation",
-    "FOOTER_PHONE": "Telephone: +49 1782871785",
+    "CONTACT_TITLE": "Contact",
+    "CONTACT_DESCRIPTION": "A Blue Lemon Productions is already organizing the first Latin World Music Festival in Dubai 2021 (UAE). If you are interested in the project and want to get more information about it, just contact with any of ours offices.",
+    "CONTACTS": [
+      {
+        "CONTACT": "Carles Del Río",
+        "OFFICE": "Germany office",
+        "ADDRESS": "Elbestrasse 15, 60329 – Frankfurt am Main, Germany",
+        "PHONE": "Telephone: +49 1782871785",
+        "MAIL": "carles@abluelemon.com"
+      },
+      {
+        "CONTACT": "Xavi Del Río",
+        "OFFICE": "Spain office",
+        "ADDRESS": "C/ Fuenterrabía num. 6 Escalera centro. 2 izquierda 28014 Madrid",
+        "PHONE": "",
+        "MAIL": "xavi@abluelemon.com"
+      }
+    ],
+    "GO_HOME": "Go Home",
     "MAIN_TITLE": "we create each one of our projects to showcase the unique flavour and culture of the community.",
+    "NAVIGATION": "Navigation",
+    "NOT_FOUND_TITLE": "PAGE NOT FOUND",
+    "NOT_FOUND_TEXT": "The page you are looking for was moved, removed, renamed or might never existed.",
     "PROJECTS_TITLE": "Projects",
-    "PROJECTS_DESCRIPTION": "A Blue Lemon Productions finds itself in the early stages of creation and is already organizing the first Latin World Music Festival in Dubai 2021 (UAE).",
-    "PROJECTS_DESCRIPTION_1": "Prior experience has been made with the organization of smaller events such as:"
+    "PROJECTS_DESCRIPTION": [
+      "A Blue Lemon Productions finds itself in the early stages of creation and is already organizing the first Latin World Music Festival in Dubai 2021 (UAE).",
+      "Prior experience has been made with the organization of smaller events such as:"
+    ]
   }
 }

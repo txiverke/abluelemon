@@ -6,6 +6,7 @@ const Title = styled.h2`
   color: #15b6cd;
   margin: 4.5rem 0 1rem;
   opacity: 0;
+  z-index: 1;
   transition: opacity 1000ms cubic-bezier(0.19, 1, 0.22, 1),
     margin-top 800ms cubic-bezier(0.19, 1, 0.22, 1);
 

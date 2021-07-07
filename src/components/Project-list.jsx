@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import TitleSection from './Title-section';
 import ProjectItem from './Project-item';
 import Loader from './Loader';
-import config from '../config';
 import { useWindowSize } from './Hooks';
 import { LocalesContext } from './Context';
-
-const { API_URL, fetch_options } = config;
+import * as API from '../utils/API'
 
 const Container = styled.div`
   position: relative;
@@ -53,8 +51,7 @@ const ProjectList = props => {
   const { h: height } = useWindowSize();
 
   function fetchData() {
-    fetch(`${API_URL}projects`, fetch_options.get)
-      .then(res => res.json())
+    API.get('projects')
       .then(res => {
         if (res.success) {
           setData(res.data);
@@ -84,7 +81,7 @@ const ProjectList = props => {
     <Container position={height}>
       <TitleSection
         title={LOCALES.PROJECTS_TITLE}
-        text={[LOCALES.PROJECTS_DESCRIPTION, LOCALES.PROJECTS_DESCRIPTION_1]}
+        text={LOCALES.PROJECTS_DESCRIPTION}
         show={render}
       />
       <Body>

@@ -126,7 +126,7 @@ const Footer = () => {
       </Copy>
       <Section>
         <Nav>
-          <Title>{LOCALES.FOOTER_NAVIGATION}</Title>
+          <Title>{LOCALES.NAVIGATION}</Title>
           {nav_data.map(n => (
             <LinkNav key={n.label} to={n.url}>
               {n.label}
@@ -134,14 +134,18 @@ const Footer = () => {
           ))}
         </Nav>
         <Contact>
-          <Title>{LOCALES.FOOTER_OFFICE}</Title>
+          <Title>{LOCALES.CONTACTS[0].OFFICE}</Title>
           <Text>
-            {LOCALES.FOOTER_ADDRESS}
+            <strong>{LOCALES.CONTACTS[0].CONTACT}</strong>
             <br />
-            {LOCALES.FOOTER_PHONE}
+            {LOCALES.CONTACTS[0].ADDRESS}
             <br />
-            E-Mail:
-            <a href='mailto:carles@abluelemon.com'> carles@abluelemon.com</a>
+            {LOCALES.CONTACTS[0].PHONE}
+            <br />
+            E-Mail:&nbsp;
+            <a href={`mailto: ${LOCALES.CONTACTS[0].MAIL}`}>
+              {LOCALES.CONTACTS[0].MAIL}
+            </a>
           </Text>
         </Contact>
       </Section>

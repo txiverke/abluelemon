@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import IconMenu from './Icons';
+import { IconMenu } from './Icons';
 import NavigationItem from './Navigation-item';
 
 const nav_data = [

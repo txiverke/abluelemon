@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 import Loader from './components/Loader.jsx';
-import Project from './views/Project'
+import Project from './views/Project';
 
 const Landing = Loadable({
   loader: () => import(/* webpackChunkName: "landing" */ './views/Landing'),
@@ -28,7 +28,7 @@ const NotFound = Loadable({
 const Routes = () => (
   <Switch>
     <Route exact path='/' component={Landing} />
-    <Route path='/projects/:id' component={Project} />
+    <Route path='/projects/:slug' component={Project} />
     <Route path='/projects' component={Projects} />
     <Route path='/contact' component={Contact} />
     <Route component={NotFound} />

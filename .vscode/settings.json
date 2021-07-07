@@ -1,4 +1,5 @@
 {
   "editor.tabCompletion": "on",
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "python.linting.pylintEnabled": false
 }

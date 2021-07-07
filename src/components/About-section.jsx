@@ -5,10 +5,8 @@ import TitleSection from './Title-section';
 import Loader from './Loader';
 import Box from './Box';
 import { useWindowSize, useScrollPosition } from './Hooks';
-import config from '../config';
-import { LocalesContext } from './Context'
-
-const { API_URL, fetch_options } = config;
+import { LocalesContext } from './Context';
+import * as API from '../utils/API';
 
 const Container = styled.section`
   position: relative;
@@ -23,6 +21,7 @@ const Container = styled.section`
   box-sizing: border-box;
   background: #262938;
   z-index: 1;
+  opacity: 0.99;
 
   @media only screen and (min-width: 768px) and (max-width: 1224px) {
     padding: 5%;
@@ -55,21 +54,25 @@ const Boxes = styled.div`
 const AboutSection = () => {
   const [data, setData] = useState([]);
   const [render, setRender] = useState(false);
-  const LOCALES = useContext(LocalesContext)
+  const LOCALES = useContext(LocalesContext);
   const { h: height } = useWindowSize();
   const scroll = useScrollPosition();
 
   function fetchData() {
-    fetch(`${API_URL}users`, fetch_options.get)
-      .then(res => res.json())
+    const promise = API.get('users');
+    promise
       .then(res => {
         if (res.success) {
+          const sliced = res.data.splice(res.data.findIndex(user => user.name === 'Hassan Mokdad'), 1)
           setData(res.data);
         } else {
           setData([]);
         }
       })
-      .catch(err => setData([]));
+      .catch(err => {
+        setData([]);
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -101,18 +104,10 @@ const AboutSection = () => {
 
       <Boxes>
         {data
-        .sort((a,b) => a._id > b._id ? -1 : 1)
-        .map((a, i) => (
-          <Box
-            order={i + 1}
-            key={a._id}
-            img={a.img}
-            name={a.name}
-            description={a.description}
-            mail={a.email}
-            role={a.role}
-          />
-        ))}
+          .sort((a, b) => (a._id > b._id ? -1 : 1))
+          .map((a, i) => (
+            <Box order={i + 1} key={a._id} {...a} />
+          ))}
       </Boxes>
     </Container>
   );

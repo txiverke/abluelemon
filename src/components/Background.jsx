@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { IconArrow } from './Icons';
 import { useScrollPosition } from './Hooks';
 import Title from '../components/Title';
 
@@ -29,7 +30,7 @@ const Image = styled.div.attrs({
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out, top 0.5s ease-out;
+  transition: opacity 0.5s ease-in-out;
 
   ${props =>
     props.render &&
@@ -38,11 +39,26 @@ const Image = styled.div.attrs({
     `}
 `;
 
+const iconStyling = css`
+  position: absolute;
+  top: -5rem;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const Icon = styled(IconArrow)`
+  ${iconStyling}
+`;
+
 const Background = props => {
+  const { image, text } = props;
   const [render, setRender] = useState(false);
+  const [background, setBackground] = useState(
+    Array.isArray(image) ? image[0] : image,
+  );
   const scroll = useScrollPosition();
   const position = Math.floor(scroll / 10);
-  const { url, text } = props;
+  let index = 0;
 
   useEffect(
     () => {
@@ -51,6 +67,20 @@ const Background = props => {
     [render],
   );
 
+  function renderBackground() {
+    index = index < image.length - 1 ? index + 1 : 0;
+    setBackground(image[index]);
+  }
+
+  useEffect(() => {
+    if (Array.isArray(image)) {
+      var interval = setInterval(() => {
+        renderBackground();
+      }, 10000);
+    }
+    return () => clearInterval(interval)
+  }, []);                                                                   
+
   return (
     <Fragment>
       <Title text={text} />
@@ -58,16 +88,17 @@ const Background = props => {
         <Image
           render={render}
           position={position}
-          style={{ backgroundImage: `url(${url})` }}
+          style={{ backgroundImage: `url(${background})` }}
         />
       </Figure>
+      <Icon {...props} />
     </Fragment>
   );
 };
 
 Background.propTypes = {
   text: PropTypes.string,
-  url: PropTypes.string.isRequired,
+  image: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 };
 
 export default Background;

@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from 'react-helmet';
 import Loadable from 'react-loadable';
+import { Redirect } from 'react-router-dom';
 
-import ProjectBody from '../components/Project-body';
 import Loader from '../components/Loader';
 import Background from '../components/Background';
 import { getLastStr } from '../utils/helpers';
 import config from '../config';
 
-const { API_URL, fetch_options } = config;
+import * as API from '../utils/API';
 
 const Footer = Loadable({
   loader: () => import(/* webpackChunkName: 'footer' */ '../components/Footer'),
   loading: Loader,
 });
 
+const ProjectBody = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: 'project-body' */ '../components/Project-body'),
+  loading: Loader,
+});
+
 const Project = props => {
   const [data, setData] = useState({});
+  const [images, setImages] = useState(null);
   const [lazy, setLazy] = useState(false);
+  const [redirect, setRedirect] = useState(false);
   const { pathname } = props.location;
 
   function fetchData(id) {
-    fetch(`${API_URL}projects/${id}`, fetch_options.get)
-      .then(res => res.json())
-      .then(res => {
-        if (res.success) {
-          setData(res.data);
-        } else {
-          setData({});
-        }
-      })
-      .catch(err => setData({}));
+    API.get(`projects/${id}`).then(res => {
+      if (res.success) {
+        let [a, ...images] = res.data.images;
+        setImages(images);
+        setData(res.data);
+      } else {
+        setData({});
+        setRedirect(true);
+      }
+    });
   }
 
   useEffect(() => {
@@ -43,12 +51,16 @@ const Project = props => {
   useEffect(
     () => {
       Footer.preload();
+      ProjectBody.preload();
       setLazy(true);
     },
     [lazy],
   );
 
-  if (Object.keys(data).length === 0) return <Loader msg={'Loading project'} />;
+  if (Object.keys(data).length === 0 && !redirect)
+    return <Loader msg={'Loading project'} />;
+  if (Object.keys(data).length === 0 && redirect)
+    return <Redirect to='/not-found' />;
 
   return (
     <section>
@@ -59,8 +71,8 @@ const Project = props => {
           { property: 'og:title', content: data.title },
         ]}
       />
-      <Background url={data.images[1]} text={data.title} />
-      <ProjectBody />
+      <Background image={images} text={data.title} />
+      {!!lazy && <ProjectBody {...data} />}
       {!!lazy && <Footer />}
     </section>
   );

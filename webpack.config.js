@@ -10,10 +10,6 @@ module.exports = ({ mode, presets } = { mode: 'production', presets: [] }) => {
     {
       entry: ['./src/index.js'],
       mode,
-      output: {
-        filename: '[hash].bundle.js',
-        chunkFilename: '[id].[chunkhash].lazy.js',
-      },
       module: {
         rules: [
           {

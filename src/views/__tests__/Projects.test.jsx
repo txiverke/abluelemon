@@ -1,10 +1,14 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import Projects from '../Projects'
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import Projects from '../Projects';
+
+/**
+ * @todo - Switch to shallow when jest works shallow in React Hooks
+ */
 
 describe('<Projects />', () => {
   it('should render itself', () => {
-    const component = shallow(<Projects />)
-    expect(component).toMatchSnapshot()
-  })
-}) 
+    const component = mount(<Projects />);
+    expect(component).toMatchSnapshot();
+  });
+});

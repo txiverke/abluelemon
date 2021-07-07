@@ -21,7 +21,7 @@ const Container = styled.article.attrs({
   opacity: 0;
   transition: opacity 500ms ease-in-out, margin-top 500ms ease-in-out;
 
-  &:nth-child(2) {
+  &:nth-child(3n + 2) {
     margin-left: 2%;
     margin-right: 2%;
   }
@@ -31,7 +31,7 @@ const Container = styled.article.attrs({
     margin-bottom: 2%;
     padding: 1.5rem;
 
-    &:nth-child(2) {
+    &:nth-child(3n + 2) {
       margin-left: 0;
       margin-right: 0;
     }
@@ -48,7 +48,7 @@ const Container = styled.article.attrs({
     padding: 1.5rem;
     min-height: 500px;
 
-    &:nth-child(2) {
+    &:nth-child(3n + 2) {
       margin-left: 0;
       margin-right: 0;
     }
